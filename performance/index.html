@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="PulsePilot is a premium website performance testing dashboard demo built with HTML, CSS, and simple JavaScript." />
+  <title>PulsePilot | Website Performance Analyzer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="container topbar__inner">
+        <a class="brand" href="#top" aria-label="PulsePilot home">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 48 48" class="brand__icon" role="img" aria-hidden="true">
+              <defs>
+                <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#4f8cff" />
+                  <stop offset="100%" stop-color="#7c5cff" />
+                </linearGradient>
+              </defs>
+              <circle cx="24" cy="24" r="21" fill="url(#logoGradient)" />
+              <path d="M15 27c4-10 14-13 19-5" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" />
+              <path d="M18 33h12" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" />
+            </svg>
+          </span>
+          <span class="brand__text">
+            <strong>PulsePilot</strong>
+            <span>Performance analyzer</span>
+          </span>
+        </a>
+
+        <div class="topbar__actions">
+          <a class="ghost-button ghost-button--link" href="#json-response-card">JSON response</a>
+          <a class="ghost-button ghost-button--link" href="#history">History</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero section" id="top">
+        <div class="container hero__grid">
+          <div class="hero__copy reveal">
+            <p class="eyebrow">Premium website performance testing dashboard</p>
+            <h1>Analyze page speed with a polished, SaaS-style experience.</h1>
+            <p class="hero__description">
+              PulsePilot helps you test a website URL, compare mobile and desktop results, review Core Web Vitals,
+              and generate a shareable report in a clean dashboard layout.
+            </p>
+
+            <div class="hero__actions">
+              <a class="button button--primary" href="#analyzer">Start analysis</a>
+              <a class="button button--secondary" href="#history">View recent tests</a>
+            </div>
+
+            <ul class="hero__highlights" aria-label="Highlights">
+              <li>
+                <strong>Live demo</strong>
+                <span>Fast, interactive, and beginner-friendly</span>
+              </li>
+              <li>
+                <strong>Responsive</strong>
+                <span>Designed for desktop, tablet, and mobile</span>
+              </li>
+              <li>
+                <strong>Reusable UI</strong>
+                <span>Component-based structure and clean naming</span>
+              </li>
+            </ul>
+          </div>
+
+          <aside class="hero__stats-panel reveal">
+            <div class="glass-card glass-card--hero">
+              <div class="glass-card__top">
+                <div>
+                  <p class="glass-card__eyebrow">Brand identity</p>
+                  <h2>Signal-grade speed insights</h2>
+                </div>
+                <span class="status-badge status-badge--active">Ready</span>
+              </div>
+
+              <div class="mini-stats">
+                <article class="mini-stat">
+                  <span>Automation</span>
+                  <strong>Smart scoring</strong>
+                </article>
+                <article class="mini-stat">
+                  <span>Reports</span>
+                  <strong>JSON response view</strong>
+                </article>
+                <article class="mini-stat">
+                  <span>History</span>
+                  <strong>Local URL log</strong>
+                </article>
+              </div>
+
+              <div class="spark-card">
+                <div class="spark-card__header">
+                  <span>Dashboard preview</span>
+                  <span>PulsePilot</span>
+                </div>
+                <div class="spark-bars" aria-hidden="true">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section section--muted" id="analyzer">
+        <div class="container analyzer-layout">
+          <div class="main-column">
+            <div class="analysis-panel panel reveal">
+              <div class="section-heading section-heading--compact">
+                <p class="eyebrow">Performance check</p>
+                <h2>Enter a URL and run the demo analyzer.</h2>
+              </div>
+
+              <form class="analysis-form" id="analysis-form">
+                <label class="field field--url" for="page-url">
+                  <span class="field__label">Website URL</span>
+                  <input id="page-url" type="text" inputmode="url" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="https://example.com" required />
+                </label>
+
+                <div class="field-row">
+                  <label class="field field--select">
+                    <span class="field__label">Device</span>
+                    <select id="device-mode">
+                      <option value="mobile">Mobile</option>
+                      <option value="desktop">Desktop</option>
+                    </select>
+                  </label>
+
+                  <label class="field field--select">
+                    <span class="field__label">Connection</span>
+                    <select id="connection-mode">
+                      <option value="wifi">Wi-Fi</option>
+                      <option value="4g" selected>4G</option>
+                      <option value="3g">3G</option>
+                    </select>
+                  </label>
+                </div>
+
+                <div class="analysis-actions">
+                  <button class="button button--primary" type="submit">Analyze</button>
+                  <p class="analysis-status" id="analysis-status" aria-live="polite">Ready to analyze a website.</p>
+                </div>
+              </form>
+            </div>
+
+            <div class="tabs-card panel reveal">
+              <div class="tab-switch" role="tablist" aria-label="Device comparison">
+                <button class="tab-switch__button is-active" type="button" data-device="mobile" aria-pressed="true">Mobile</button>
+                <button class="tab-switch__button" type="button" data-device="desktop" aria-pressed="false">Desktop</button>
+              </div>
+              <p class="tabs-card__text">Switch between form factors to compare performance conditions and simulated vitals.</p>
+            </div>
+
+            <section class="report-grid">
+              <article class="score-card panel reveal">
+                <div class="score-card__header">
+                  <div>
+                    <p class="eyebrow">Performance score</p>
+                    <h2 id="report-title">Performance report for https://www.shunyavkash.com/</h2>
+                  </div>
+                  <span class="status-badge status-badge--good" id="report-device">Mobile</span>
+                </div>
+
+                <div class="score-card__body">
+                  <div class="score-ring">
+                    <div class="score-ring__inner">
+                      <span class="score-ring__value" data-score="performance">92</span>
+                      <span class="score-ring__label">Score</span>
+                    </div>
+                  </div>
+
+                  <div class="score-summary">
+                    <div class="score-summary__row">
+                      <span>Selected URL</span>
+                      <strong id="report-url">https://www.shunyavkash.com/</strong>
+                    </div>
+                    <div class="score-summary__row">
+                      <span>Connection</span>
+                      <strong id="report-connection">4G</strong>
+                    </div>
+                    <div class="score-summary__row">
+                      <span>Analysis time</span>
+                      <strong id="report-time">Just now</strong>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="summary-card panel reveal">
+                <div class="summary-card__top">
+                  <p class="eyebrow">Core metrics</p>
+                  <span class="summary-card__chip">Score breakdown</span>
+                </div>
+
+                <div class="metric-grid">
+                  <article class="metric-card">
+                    <div class="metric-card__top">
+                      <span>Performance</span>
+                      <strong data-metric="performance">92</strong>
+                    </div>
+                    <div class="metric-bar">
+                      <span class="metric-bar__fill metric-bar__fill--performance" data-bar="performance" style="width: 92%"></span>
+                    </div>
+                  </article>
+                  <article class="metric-card">
+                    <div class="metric-card__top">
+                      <span>Accessibility</span>
+                      <strong data-metric="accessibility">98</strong>
+                    </div>
+                    <div class="metric-bar">
+                      <span class="metric-bar__fill metric-bar__fill--accessibility" data-bar="accessibility" style="width: 98%"></span>
+                    </div>
+                  </article>
+                  <article class="metric-card">
+                    <div class="metric-card__top">
+                      <span>Best Practices</span>
+                      <strong data-metric="best-practices">96</strong>
+                    </div>
+                    <div class="metric-bar">
+                      <span class="metric-bar__fill metric-bar__fill--best-practices" data-bar="best-practices" style="width: 96%"></span>
+                    </div>
+                  </article>
+                  <article class="metric-card">
+                    <div class="metric-card__top">
+                      <span>SEO</span>
+                      <strong data-metric="seo">94</strong>
+                    </div>
+                    <div class="metric-bar">
+                      <span class="metric-bar__fill metric-bar__fill--seo" data-bar="seo" style="width: 94%"></span>
+                    </div>
+                  </article>
+                </div>
+              </article>
+            </section>
+
+          </div>
+
+          <aside class="sidebar">
+            <section class="panel reveal" id="history">
+              <div class="section-heading section-heading--compact">
+                <p class="eyebrow">History</p>
+                <h2>Recent tested URLs</h2>
+              </div>
+              <div class="history-list" id="history-list"></div>
+            </section>
+
+            <section class="panel reveal">
+              <div class="section-heading section-heading--compact">
+                <p class="eyebrow">Dashboard analytics</p>
+                <h2>Quick overview</h2>
+              </div>
+
+              <div class="analytics-grid">
+                <article class="analytics-card">
+                  <span>Avg score</span>
+                  <strong id="analytics-average">92</strong>
+                </article>
+                <article class="analytics-card">
+                  <span>Best device</span>
+                  <strong id="analytics-device">Mobile</strong>
+                </article>
+                <article class="analytics-card">
+                  <span>Tests saved</span>
+                  <strong id="analytics-count">0</strong>
+                </article>
+                <article class="analytics-card">
+                  <span>Status</span>
+                  <strong>Stable</strong>
+                </article>
+              </div>
+            </section>
+
+            <section class="panel reveal" id="json-response-card">
+              <div class="section-heading section-heading--compact">
+                <p class="eyebrow">JSON response</p>
+                <h2>Live report data</h2>
+              </div>
+              <div class="json-response-card">
+                <div class="json-response-card__header">
+                  <span>Response preview</span>
+                  <button class="button button--secondary button--compact" type="button" id="copy-json">Copy JSON</button>
+                </div>
+                <div class="json-response-summary" id="json-response-summary"></div>
+                <div class="json-response-view" id="json-response-view" aria-live="polite"></div>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div>
+          <a class="brand brand--footer" href="#top">
+            <span class="brand__mark" aria-hidden="true">
+              <svg viewBox="0 0 48 48" class="brand__icon" role="img" aria-hidden="true">
+                <defs>
+                  <linearGradient id="logoGradientFooter" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#4f8cff" />
+                    <stop offset="100%" stop-color="#7c5cff" />
+                  </linearGradient>
+                </defs>
+                <circle cx="24" cy="24" r="21" fill="url(#logoGradientFooter)" />
+                <path d="M15 27c4-10 14-13 19-5" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" />
+                <path d="M18 33h12" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" />
+              </svg>
+            </span>
+            <span class="brand__text">
+              <strong>PulsePilot</strong>
+              <span>Performance analyzer</span>
+            </span>
+          </a>
+          <p class="footer__text">
+            A premium demo project for website performance testing, designed with reusable sections, simple JavaScript,
+            and a polished dashboard-style interface.
+          </p>
+        </div>
+        <div class="footer__meta">
+          <span>Frontend Demo</span>
+          <span id="current-year"></span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <template id="history-item-template">
+    <article class="history-item">
+      <div>
+        <strong class="history-item__title"></strong>
+        <p class="history-item__meta"></p>
+      </div>
+      <span class="history-item__score"></span>
+    </article>
+  </template>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
